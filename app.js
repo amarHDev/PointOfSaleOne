@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const exphbs = require("express-handlebars");
 const bodyParser = require('body-parser'); //pour extraire les données taper dans les formulaires
@@ -7,7 +8,8 @@ const passport = require('passport');
 const passportSetup = require('./config/passport');
 var CookieSession = require('cookie-session'); // Charge le middleware de sessions
 
-let PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
+
 
 
 
@@ -78,6 +80,4 @@ const db = require('./config/database');
 
 
 
-app.listen(PORT, function() {
-    console.log(`Example app listening on port ${PORT}`)
-});
+app.listen(PORT);

@@ -1,0 +1,135 @@
+<%- include('../partials/header1') -%>
+    <%- include('../partials/styleDashboard') -%>
+        <%- include('../partials/header2') -%>
+
+
+
+
+            <!-- Breadcrumbs-->
+            <!-- <ol class="breadcrumb" id="BreadCrumbLink">
+                <li class="breadcrumb-item">
+                    <a href="/dashboard">Dashboard</a>
+                </li>
+            </ol> -->
+
+            <div class="breadcrumb flat">
+                <a href="#" class="active">Admin</a>
+                <a href="/dashboard">Dashboard</a>
+            </div>
+            <!-- /Breadcrumbs-->
+
+
+
+
+
+
+
+
+
+
+            <!-- row1 -->
+            <div class="row">
+
+
+
+                <!-- Col1 -->
+                <div class="col-xl-3 col-sm-6 mb-3">
+                    <div class="card dashboard text-white btnVoir4 o-hidden h-100">
+                        <div class="card-body">
+                            <div class="card-body-icon">
+                                <i class="fa fa-barcode" aria-hidden="true"></i>
+                            </div>
+                            <div class="mr-5">
+                                <h5>Produits</h5>
+                            </div>
+                        </div>
+                        <a class="card-footer text-white clearfix small z-1  HoverEff4" href="/product/productList">
+                            <span class="float-left">Voire Plus</span>
+                            <span class="float-right">
+            <i class="fa fa-angle-right"></i>
+          </span>
+                        </a>
+                    </div>
+                </div>
+                <!-- /Col1 -->
+
+                <!-- Col2 -->
+                <div class="col-xl-3 col-sm-6 mb-3">
+                    <div class="card dashboard text-white btnVoir5 o-hidden h-100">
+                        <div class="card-body">
+                            <div class="card-body-icon">
+                                <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                            </div>
+                            <div class="mr-5">
+                                <h5>Clients</h5>
+                            </div>
+                        </div>
+                        <a class="card-footer text-white clearfix small z-1 HoverEff5" href="/client/clientLists">
+                            <span class="float-left">Voire Plus</span>
+                            <span class="float-right">
+              <i class="fa fa-angle-right"></i>
+            </span>
+                        </a>
+                    </div>
+                </div>
+                <!-- /Col2 -->
+
+                <!-- Col3 -->
+                <% if (user.username==='admin') { %>
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card dashboard text-white btnVoir6 o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-calendar-check-o"></i>
+                                </div>
+                                <div class="mr-5">
+                                    <h5>Gestion des employés</h5>
+                                </div>
+                            </div>
+                            <a class="card-footer text-white clearfix small z-1 HoverEff6" href="/users/usersList">
+                                <span class="float-left">Voire Plus</span>
+                                <span class="float-right">
+            <i class="fa fa-angle-right"></i>
+          </span>
+                            </a>
+                        </div>
+                    </div>
+                    <%}  %>
+                        <!-- /Col3 -->
+
+                        <!-- Col4 -->
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <div class="card dashboard text-white btnVoir7 o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-archive" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="mr-5">
+                                        <h5>Stock et suivi</h5>
+                                    </div>
+                                </div>
+                                <a class="card-footer text-white clearfix small z-1 HoverEff7" href="/stock">
+                                    <span class="float-left">Voire Plus</span>
+                                    <span class="float-right">
+            <i class="fa fa-angle-right"></i>
+          </span>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /Col4 -->
+
+
+
+
+            </div>
+            <!-- row1 -->
+
+
+
+
+          
+
+
+
+
+            <%- include('../partials/footer') -%>

@@ -1,0 +1,354 @@
+<%- include('../partials/header1') -%>
+    <%- include('../partials/styleDashboard') -%>
+        <%- include('../partials/styleAddProduct') -%>
+        <%- include('../partials/style3') -%>
+        <%- include('../partials/style4') -%>
+            <%- include('../partials/header2') -%>
+
+
+            
+
+                <!-- Breadcrumb -->
+                <div class="breadcrumb flat">
+                    <a href="<%= '/users/modifier/'  + user.id %>">Admin</a>
+                    <a href="/product/ProductList">Liste Produits</a>
+                    <a href="/product/addProduct">Ajouter produits</a>
+                    <a href="/product/modifier/<%= event.id %>" class="active">Modifier Produit</a>
+                </div>
+                <!-- Fin Breadcrumb -->
+               
+               
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="row" id="SectionmodifierTofProd">
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 text-center tofP" >
+
+                    <img src="<%= '/imgProduct/' + event.avatar%>" alt="" height="250px" width="250px"/>
+    
+        </div>
+
+        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+     
+             <!-- UL-->
+             <ul class="nav nav-tabs" id="navTabUser">
+                <li class="active">
+                    <a data-toggle="tab" href="#home">
+                      <div class="card-header">
+                          <h5 class="card-title">Profile</h5>
+                      </div>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#menu1">
+                        <div class="card-header">
+                            <h5 class="card-title">Modifier Informations</h5>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#menu2">
+                        <div class="card-header">
+                            <h5 class="card-title">Modifier Photo</h5>
+                        </div>
+                    </a>      
+                </li> 
+            </ul>
+            <!-- /UL-->
+
+            <div class="tab-content">
+             <div id="home" class="tab-pane in active">
+                <div class="card card-user">     
+                    <div class="card-body" >
+                      <% if (locals.errors) {%>
+                          <% errors.forEach((err)=> {%>
+                              <div class="alert alert-danger">
+                                  <%= err.msg%>
+                              </div>
+                              <%})%>
+                                  <%}%>
+                      
+                      
+                                <% if (locals.message && message !="") {%>
+                      
+                                          <div class="alert alert-success">
+                                              <%= message%>
+                                          </div>
+                                          <%}%>
+                               <% if (locals.error && error !="") {%>
+                      
+                                       <div class="alert  alert-danger">
+                                                  <%= error%>
+                                        </div>
+                               <%}%>
+                        <div class="row" style="margin-bottom: 2.5%; margin-top: 2.5%;">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-4">
+                                    <h5>Quantité en stock:</h5>
+                                </div>
+                                <div class="col-md-3" style="padding-top: 5px;">
+                                    <span ><%= event.Qtt%></span><span> Unités</span>
+                                </div>
+                           
+                        </div>  
+                        <div class="row" style="margin-top: 4%;">
+                            
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3">
+                                <h5>Code produit :</h5>
+                            </div>
+                            <div class="col-md-3" style="padding-top: 5px;">
+                                <span ><%= event.Code%></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>   
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3">
+                                <h5>Nom :</h5>
+                            </div>
+                            <div class="col-md-3" style="padding-top: 5px;">
+                                <span ><%= event.Name%></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>   
+                        
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3">
+                                <h5>Categorie :</h5>
+                            </div>
+                            <div class="col-md-3" style="padding-top: 5px;">
+                                <span ><%= event.Categorie%></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>    
+                        <div class="row" style="margin-bottom: 12%;">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3">
+                                <h5>Prix :</h5>
+                            </div>
+                            <div class="col-md-3" style="padding-top: 5px;">
+                                <span ><%= event.Price%></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>   
+                          
+                        
+                        
+
+
+
+                    </div>
+                </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div id="menu1" class="tab-pane">
+                    <div class="card card-user ">     
+                        <div class="card-body ">
+                         
+                                <form action="/product/modifier" method="POST"  class="modifierProfilsProductForm">
+
+                                   
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="CodeP" style="font-size: 2rem;">Code</label>
+                                            <input type="number" class="form-control" name="Code" id="codeP" value="<%= event.Code%>">
+                                        </div>
+                                        <input type="hidden" name="id" value="<%=event.id%>">
+                                        <div class="form-group col-md-6">
+                                            <label for="quantité" style="font-size: 2rem;">Quantité</label>
+                                            <input type="number" class="form-control" name="Qtt" id="quantité"  value="<%= event.Qtt%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="nameP" style="font-size: 2rem;">Nom Produit</label>
+                                            <input type="text" class="form-control" name="Name" id="nameP"  value="<%= event.Name%>">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="prix" style="font-size: 2rem;">Prix unitaire</label>
+                                            <input type="number" class="form-control" name="Price" id="prix"  value="<%= event.Price%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cat" style="font-size: 2rem;">Categorie</label>
+                                        
+                                        <select aria-controls="dataTable" class="form-control form-control-sm" name="Categorie" id="Categorie">
+                                    
+                                            <option value="<%= event.Categorie%>"><%= event.Categorie%></option>
+                                            <% chunk.forEach((events)=>{ %>
+                                                <% events.forEach((event)=>{ %>
+                                                    <% if(event.Categorie!=event.Name){%>
+                                                        <option value="<%= event.Name%>" ><%= event.Name%></option>
+                                                    <%} else {%>
+
+                                                        <option value="<%= event.Name%>" ><%= event.Name%></option>
+                                                    <%}%>
+                                                <%})%>
+                                            <%})%>
+                                    </select>
+                                    
+                                    </div>
+                                    
+                                      
+
+                                    <input type="text" value="<%=event.avatar%>" name="noTofs" id="noTofs" style="display: none;"> 
+
+                                   
+
+                                    <button type="submit" class="btn  btnEnregistrer modifierProfilsProductButton">Sauvegarder</button>
+                                </form>
+                        
+
+                          
+                        </div>
+                        </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+                  <!-- tab3 -->
+                  <div id="menu2" class="tab-pane">
+                    
+                      <div class="card card-user">     
+                          <div class="card-body">
+
+                              <form action="/product/modifierTof" method="POST" enctype="multipart/form-data" class="modifierTofProductForm">
+                                  
+                               <div>
+                                      <label for="avatar" style="font-size: 2rem;">Cliquer sur l'icone pour charger votre photo</label>
+                                      <div class="row align-items-end">
+                                          
+                                          <div class="col-sm-2">
+                                          </div>
+
+                                          <div class="col-sm-4">
+                                              
+                                              <input type="file" name="avatar" id="avatar"  class="inputfile inputfile-5 " data-multiple-caption="{count} files selected" multiple onchange="readURL(this)" />
+                                              <label for="avatar" ><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span>Uploader ici !</span></label>
+                                          </div>
+
+                                          <div class="col-sm-6" >
+                                              <img src="<%= '/imgProduct/' + event.avatar%>" alt="" class="dropzone"  id="imagePlaceholder" height="200px" width="200px" style="border-radius: 50%">
+                                          </div>
+                                          
+                                      </div>
+                                  </div>
+
+                                  <div style="display: none;">
+                                      <input type="text" name="codeTof" id="nomTof" value="<%= event.Code%>">
+                                      <input type="text" name="qttTof" id="prenomTof" value="<%= event.Qtt%>">
+                                      <input type="text" name="nameCTof" id="codeClientTof" value="<%= event.Name%>">
+                                      <input type="text" name="priceCTof" id="codeClientTof" value="<%= event.Price%>">
+                                      <input type="text" name="catTof" id="codeClientTof" value="<%= event.Categorie%>">
+                                      <input type="hidden" name="idTof" value="<%= event.id%>">
+                                  </div>
+
+                                  <button type="submit" class="btn btnEnregistrer modifierTofProductButton">modifier</button>
+                              </form>
+
+                          </div>
+                      </div>
+                  
+
+                  </div>
+
+
+             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="background-color: #34495e ;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel" style="color:white">Confirmation de la supprition</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                                </div>
+                                <div class="modal-body" style="color:white;  text-align: center;">
+                                    <div class="form-group col-md-12" style="margin-top: 20px;">
+                                        <label for="nom" ><span>Du produit : </span><%= event.Name%></label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                    <button class="btn btn-danger" onclick="deleteProduct()" id="deleteBtn" data-id="<%= event.id%>">supprimer</button>
+                                </div>
+                            </div>
+                        </div>
+             </div> 
+
+                     <%- include('../partials/JsStyle1') -%>
+                     <%- include('../partials/JsStyle2') -%>
+                     <%- include('../partials/footer') -%>

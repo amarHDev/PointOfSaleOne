@@ -1,0 +1,504 @@
+<%- include('../partials/header1') -%>
+    <%- include('../partials/styleDashboard') -%>
+        <%- include('../partials/styleAddProduct') -%>
+            <%- include('../partials/style3') -%>
+                <%- include('../partials/header2') -%>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+
+
+
+
+    <!-- POS Content -->
+    <div class="posContent">
+
+       
+        <!-- products List -->
+        <div class="products filter">
+
+
+            <% chunk.forEach((events)=>{ %>
+                <% events.forEach((event)=>{ %>
+
+                    <div class="product-card">
+
+                        <h1>
+                            <span id="span2"><%= event.Name%></span>
+                        </h1>
+
+                        <p>
+                            <%= event.Categorie%>
+                        </p>
+
+                        <div><img src="<%= '/imgProduct/' + event.avatar%>" alt="" class="product-pic2"></div>
+
+                        <div class="product-info">
+                            <div class="product-price">
+                                <%= event.Price%> DA
+                            </div>
+
+                            <form action="/pos/ajouterCart" method="post" class="form-inline my-2 my-lg-0 mr-lg-2 searchProducCartForm">
+
+                                <input type="hidden" name="CodeProdCart" value="<%= event.Code%>">
+                                <button onclick="loadContent()" class="product-button searchProducCartButton" type="submit" id="CodeBrCart"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <%})%>
+                        <%})%>
+
+
+
+        </div>
+        <!-- /products List -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- tickets -->
+        <div class="tickets">
+
+            <section class="promo section1">
+                <div style="text-align: left;" id="searchP">
+
+                    <a href="#addClientModal" id="btnC" data-toggle="modal"> <i class="fa fa-user-plus" aria-hidden="true"></i> </a>
+
+
+                    <form action="/pos/remise" method="post" class="form-inline my-2 my-lg-0  searchClientCbareForm">
+                        <div class="input-group ">
+
+                            <input class="form-control search-top" type="number" placeholder="CodeBarre Client" name="champsRemise">
+
+                        </div>
+
+                    </form>
+
+
+            </section>
+
+            <section class="cart section2">
+                <ul>
+
+                    <% ticketList.forEach(function(value, index, array){ %>
+
+                        <li class="item">
+
+                            <div class="image"><img src="<%= '/imgProduct/' +  value.Avatar %>" /></div>
+                            <div class="divName">
+                                <h3 class="name">
+                                    <%= value.Name %>
+                                </h3>
+                            </div>
+                            <div class="priceName">
+                                <p class="price">
+                                    <%= value.Price %>
+                                </p>
+                            </div>
+
+                            <div class="qttDuProd">
+                                <form action="/pos/modifierQtt" method="post" class="form-inline my-2 my-lg-0 mr-lg-2 ">
+                                    <input class="form-control qttDuProdItemQ  " type="number" value="<%= value.qttOnItem %>" name="qttDuProdItem" min="1">
+                                    <input type="hidden" name="CodePro" value="<%= value.Code%>">
+                                    <input type="hidden" name="cptQtt" value="<%= value.cpt%>">
+                                </form>
+
+                            </div>
+
+                            <a id="PosBtnSupp" href="<%=  '/pos/supprimer/' + index + '/' + value.Price + '/' + value.qttOnItem %>" onclick="return confirm('Confirmer la suppression De :<%= index %>')" class="tip btn btn-xs"><i class="fa fa-trash-o"></i></a>
+
+                        </li>
+
+                        <% }) %>
+
+                </ul>
+            </section>
+
+
+
+            <section class="summary" class="section3">
+
+                <div class="total">
+                    <div class="items">
+
+                        <div>
+                            <span>🛒</span>
+                            <%= ticketItem %> items
+                        </div>
+
+                        <form action="/pos/enregistrer" method="post" class="ticketProducForm">
+                            <button id="PosBtnStore" type="submit" class="btn btn-success ticketProductButton" style="width: 100%;margin: 2px; " onclick="javascript:printlayer('showScroll')">Enregistrer</button>
+                        </form>
+
+                        <form action="/pos/annuler" method="post" class="ticketProducAnnulerForm">
+                            <button  id="PosBtnAnnuler" type="submit" class="btn btn-danger ticketProductAnnulerButton " style="width: 100%;margin: 2px; ">Annuler</button>
+                        </form>
+
+                    </div>
+
+                    <div class="totalNom">
+                        <div>SubTotal </div>
+                        <div>Remise </div>
+                        <div>Total </div>
+                    </div>
+
+                    <div class="totalPrix">
+                        <div>
+                            <%= ticketSubTotal %> DA</div>
+                        <div>
+                            <%= remisePoint %> Points</div>
+                        <div>
+                            <%= ticketTotal %> DA</div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            </div>
+            <!-- /tickets -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- pagination-->
+            <div class="row " id='pagin'>
+                <div class="col-sm-12 col-md-12 " id="Souspagin">
+                    <div class="dataTables_paginate paging_simple_numbers " id="dataTable_paginate">
+
+                        <ul class="pagination pagination-sm justify-content-end">
+
+                            <% if( pageNmbr == 1 ){%>
+                                <li class="paginate_button page-item previous disabled" id="dataTable_previous">
+                                    <a href="#" aria-controls="dataTable" class="page-link">Previous</a>
+                                </li>
+                                <%}else{%>
+                                    <% k = pageNmbr-1 %>
+                                        <li class="paginate_button page-item previous" id="dataTable_previous">
+                                            <a href="<%= '/pos/' + k%>" aria-controls="dataTable" class="page-link">Previous</a>
+                                        </li>
+                                        <%}%>
+
+
+
+
+                                            <% for (let i=1 ; i<= Math.ceil(total/12); i++ ){%>
+                                                <!-- math.ceil()  si total/5= 2.1 elle prend 3-->
+                                                <% if( pageNmbr == i){%>
+                                                    <!-- Si la page  envoyer en paramètre est la page en cours en change -->
+                                                    <li class="paginate_button page-item active">
+                                                        <a href="<%= '/pos/' + i%>" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+                                                            <%= i%>
+                                                        </a>
+                                                    </li>
+                                                    <%}else{%>
+                                                        <li class="paginate_button page-item ">
+                                                            <a href="<%= '/pos/' + i%>" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+                                                                <%= i%>
+                                                            </a>
+                                                        </li>
+                                                        <%}%>
+                                                            <%} %>
+
+
+
+
+
+                                                                <% if( pageNmbr == Math.ceil(total/12) ){%>
+                                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                                                        <a href="" aria-controls="dataTable" class="page-link">Next</a>
+                                                                    </li>
+                                                                    <%}else{%>
+                                                                        <% k = pageNmbr+1 %>
+                                                                            <li class="paginate_button page-item next" id="dataTable_next">
+                                                                                <a href="<%= '/pos/' + k%>" aria-controls="dataTable" class="page-link">Next</a>
+                                                                            </li>
+                                                                            <%}%>
+
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /pagination-->
+
+
+
+
+        </div>
+        <!-- /POS Content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Modal ajouter ClientPos -->
+
+        <div id="showScroll" class="modal fade">
+            <div class="container">
+
+                <h2 style=" text-align: center;">** H&B MARCKET **</h2>
+                <p><span style="text-decoration: underline;">Adresse:</span> TIZI-Ouzou</p>
+                <p><span style="text-decoration: underline;">Tel:</span> 026.26.26.26</p>
+
+                <p style="text-align: right;"><span style="text-decoration: underline;">Caissier:</span>
+                    <%= user.username%>
+                </p>
+
+
+
+                <table class="table" style=" margin-top: 20px">
+
+                    <thead>
+                        <tr style="display: grid; grid-template-columns: 150px 80px 50px 80px; grid-gap: 25px;">
+
+                            <th style=" text-align: left;">DESIGNATION</th>
+                            <th style=" text-align: left;">PRIX</th>
+                            <th style=" text-align: left;">QTE</th>
+                            <th style=" text-align: right;">MONTANT</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td style=" text-align: left;">---------------------------------------------------------------------------------</td>
+                        </tr>
+
+                        <% ticketList.forEach(function(value, index, array){ %>
+                            <tr style="display: grid; grid-template-columns: 150px 80px 50px 80px; grid-gap: 25px;">
+
+                                <td style=" text-align: left;">
+                                    <%= value.Name %>
+                                </td>
+                                <td style="text-align: left;">
+                                    <%= value.Price / value.qttOnItem  %>
+                                </td>
+                                <td style="text-align: left;">
+                                    <%= value.qttOnItem %>
+                                </td>
+                                <td style="text-align: right;">
+                                    <%= value.Price %>
+                                </td>
+
+                            </tr>
+                            <%})  %>
+
+                                <tr>
+                                    <td style=" text-align: left;">---------------------------------------------------------------------------------</td>
+                                </tr>
+
+                                <tr style="display: grid; grid-template-columns: 150px 80px 50px 80px; grid-gap: 25px;">
+                                    <td> Remise : </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <div style="text-align: right;">
+                                            <%= remisePoint %> Points</div>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td style=" text-align: left;">---------------------------------------------------------------------------------</td>
+                                </tr>
+
+                                <tr style="display: grid; grid-template-columns: 150px 80px 50px 80px; grid-gap: 25px;">
+                                    <td>Net a Payé</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <div style="text-align: right;">
+                                            <%= ticketTotal %> DA</div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style=" text-align: left;">---------------------------------------------------------------------------------</td>
+                                </tr>
+
+</body>
+
+</table>
+<p style=" text-align: justify; line-height: 18px; letter-spacing: 4px;">Le retour des produits non conformes, <span style="text-decoration: underline;">excépté</span> les produits alimentaires, parfum seront acceptés sous 48h sur présentation du ticket. Il fera l'objet d'un échange et non d'un remboursement</p>
+
+
+<h2 style=" text-align: center; margin-top:50px; text-decoration: underline;">** SERVI **</h2>
+
+<h5 style=" text-align: right; margin-top:50px">** MERCI DE VOTRE VISITE **</h5>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<div id="addClientModal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+
+            <%- include('../message/posAddClientMsg') -%>
+
+                <!-- FORM -->
+                <form action="/client/addClientsM" method="post" target="_self" enctype="multipart/form-data" class="addClientFormPOS">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Ajouter Client</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div>
+                                    <div class="row align-items-end">
+
+                                        <div class="col-sm-6">
+
+                                            <input type="file" name="avatar" id="avatar" class="inputfile1 inputfile-5 " data-multiple-caption="{count} files2 selected" multiple onchange="readURL(this)" />
+
+                                            <label for="avatar">
+            <figure>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/>
+                </svg>
+            </figure> 
+            <span style="font-size: 13px">Uploader ici !</span>
+            </label>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <img src="" alt="" class="dropzone" id="imagePlaceholder" height="150px" width="150px" style="border-radius: 50%; margin-bottom:20px;">
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 add_top_30">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="code_client">Code client</label>
+                                            <input type="number" class="form-control" name="codeClient" id="code_client">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="lastName">Nom</label>
+                                            <input type="text" class="form-control" placeholder="votre nom ..." name="lastName" id="lastName">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="firstName">Prénom</label>
+                                            <input type="text" class="form-control" placeholder="votre prénom ..." name="firstName" id="firstName">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Exit" id="PosBtnExit">
+                            <button type="submit" class="btn btn-success addClientButtonPOS" id="inputformbTN">Ajouter</button>
+
+                        </div>
+
+
+                    </div>
+
+                </form>
+                <!-- /FORM -->
+
+
+        </div>
+    </div>
+</div>
+<!-- /Modal ajouter ClientPos -->
+
+
+
+
+
+
+
+
+                    <%- include('../partials/JsStyle2') -%>
+                        <%- include('../partials/JsStyle1') -%>
+                            <%- include('../partials/JsStyle4') -%>
+
+                                <%- include('../partials/footer') -%>

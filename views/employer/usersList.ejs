@@ -1,0 +1,193 @@
+<%- include('../partials/header1') -%>
+    <%- include('../partials/styleDashboard') -%>
+        <%- include('../partials/styleAddProduct') -%>
+            <%- include('../partials/header2') -%>
+
+
+
+                 <!-- Breadcrumb -->
+                 <div class="breadcrumb flat">
+                    <a href="<%= '/users/modifier/'  + user.id %>">Admin</a>
+                    <a href="/users/usersList" class="active">Liste Employé(e)s</a>
+                    <a href="/users/addUser">Ajouter Employé(e)s</a> 
+                </div>
+                <!-- Fin Breadcrumb -->
+
+
+
+
+
+
+
+
+
+
+
+                <!-- box_general-->
+                <div class="box_general">
+
+                    <!-- box_header-->
+                    <div class="header_box">
+
+
+                        <h2 class="d-inline-block">Liste Employé(e)s</h2>
+                        <div class="filter">
+                            <select name="gr" class="selectbox">
+                    <option value="">Tout genre</option>
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
+                </select>
+                        </div>
+                    </div>
+                    <!-- /box_header-->
+
+                    <!-- box_list_general-->
+                    <div class="list_general">
+
+                        <ul>
+                            <% chunk.forEach((events)=>{ %>
+                                <% events.forEach((event)=>{ %>
+                                    <li>
+                                        <figure><img src="<%= '/images/' + event.avatar%>" alt=""></figure>
+                                        <h4>
+                                            <%= event.lastName%>
+                                                <%= event.firstName%> <i class="pending"><%= event.username%></i></h4>
+                                        <ul class="booking_details">
+                                            <li><strong>Date de naissance</strong>
+                                                <%= event.date.toDateString()%>
+                                            </li>
+                                            <li><strong>Telephone</strong>
+                                                <%= event.tel%>
+                                            </li>
+                                            <li><strong>Adresse</strong>
+                                                <%= event.adress%>
+                                            </li>
+                                            <li><strong>Sexe</strong>
+                                                <%= event.gender%>
+                                            </li>
+                                            <li><strong>Email</strong>
+                                                <%= event.email%>
+                                            </li>
+                                        </ul>
+                                        <ul class="buttons">
+                                            <li><a href="<%=  '/users/modifier/'  + event.id %>" class="btn_1 btnVoirProfilsUser "><i class="fa fa-fw fa-check-circle-o"></i>Profil</a></li>
+                                            <li><a href="<%=  '/users/delete/'  + event.id %>" onclick="return confirm('You are going to delete user, please click ok to delete.')" class="btn_1 btnVoirProfilsUser2 "><i class="fa fa-fw fa-check-circle-o"></i>Supprimer</a></li>
+                                        </ul>
+
+                                    </li>
+                                    <%})%>
+                                        <%})%>
+                        </ul>
+                    </div>
+                    <!-- /box_list_general-->
+
+                </div>
+                <!-- /box_general-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- pagination-->
+                <div class="row">
+
+                    <div class="col-sm-12 col-md-5">
+
+                        <% if(pageNmbr == 1){  %>
+                            <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Affichage de
+                                <%= pageNmbr%> à
+                                    <%= pageNmbr + 1%> sur
+                                        <%= total%> entrées</div>
+                            <% }else if(pageNmbr == total){ %>
+                                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Affichage de
+                                    <%= pageNmbr + 1 %> à
+                                        <%= total %> sur
+                                            <%= total%> entriées</div>
+                                <% }else{ %>
+                                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Affichage de
+                                        <%= pageNmbr + 1 %> à
+                                            <%= pageNmbr + 2 %> sur
+                                                <%= total%> entriées</div>
+                                    <% } %>
+
+                    </div>
+
+                    <div class="col-sm-12 col-md-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                            <ul class="pagination pagination-sm">
+
+                                <% if( pageNmbr == 1 ){%>
+                                    <li class="paginate_button page-item previous disabled" id="dataTable_previous">
+                                        <a href="#" aria-controls="dataTable" class="page-link">Previous</a>
+                                    </li>
+                                    <%}else{%>
+                                        <% k = pageNmbr-1 %>
+                                            <li class="paginate_button page-item previous" id="dataTable_previous">
+                                                <a href="<%= '/users/usersList/' + k%>" aria-controls="dataTable" class="page-link">Previous</a>
+                                            </li>
+                                            <%}%>
+
+                                                <% for (let i=1 ; i<= Math.ceil(total/2); i++ ){%>
+                                                    <!-- math.ceil()  si total/5= 2.1 elle prend 3-->
+                                                    <% if( pageNmbr == i){%>
+                                                        <!-- Si la page  envoyer en paramètre est la page en cours en change -->
+                                                        <li class="paginate_button page-item active">
+                                                            <a href="<%= '/users/usersList/' + i%>" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+                                                                <%= i%>
+                                                            </a>
+                                                        </li>
+                                                        <%}else{%>
+                                                            <li class="paginate_button page-item ">
+                                                                <a href="<%= '/users/usersList/' + i%>" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+                                                                    <%= i%>
+                                                                </a>
+                                                            </li>
+                                                            <%}%>
+                                                                <%} %>
+
+                                                                    <% if( pageNmbr == Math.ceil(total/2) ){%>
+                                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                                                            <a href="" aria-controls="dataTable" class="page-link">Next</a>
+                                                                        </li>
+                                                                        <%}else{%>
+                                                                            <% k = pageNmbr+1 %>
+                                                                                <li class="paginate_button page-item next" id="dataTable_next">
+                                                                                    <a href="<%= '/users/usersList/' + k%>" aria-controls="dataTable" class="page-link">Next</a>
+                                                                                </li>
+                                                                                <%}%>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /pagination-->
+
+
+
+
+
+
+
+
+
+
+
+                <%- include('../partials/footer') -%>

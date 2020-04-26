@@ -1,0 +1,126 @@
+<%- include('../partials/header1') -%>    
+<%- include('../partials/styleDashboard') -%>
+<%- include('../partials/styleAddProduct') -%>
+<%- include('../partials/style3') -%>
+<%- include('../partials/header2') -%>
+
+
+
+
+
+
+
+
+<!-- Breadcrumb -->
+<div class="breadcrumb flat">
+    <a href="<%= '/users/modifier/'  + user.id %>">Admin</a>
+    <a href="/client/clientLists">Liste Clients</a>
+    <a href="/client/addClients" class="active">Ajouter Clients</a> 
+</div>
+<!-- Fin Breadcrumb -->
+
+
+
+
+
+
+
+
+
+
+<!-- BOX generale -->
+<div class="box_general padding_bottom">
+
+        <div class="header_box version_2">
+            <h2><i class="fa fa-user"></i>Ajouter Client</h2>
+        </div>
+
+
+
+        <%- include('../message/addClientMsg') -%>
+
+
+    <!-- FORM -->
+    <form action="/client/addClients" method="post" enctype="multipart/form-data">
+
+         <!-- Row -->
+        <div class="row">
+
+            <div class="col-md-2"> </div>
+
+            <div class="col-md-4">
+                <div>    
+                    <div class="row align-items-end">
+
+                        <div class="col-sm-6">
+                            
+                            <input type="file" name="avatar" id="avatar"  class="inputfile inputfile-5 " data-multiple-caption="{count} files selected" multiple onchange="readURL(this)"/>
+
+                            <label for="avatar" >
+                                <figure>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                                        <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/>
+                                    </svg>
+                                </figure>
+                                <span style="font-size: 13px">Uploader ici !</span>
+                            </label>
+                        </div>
+
+                        <div class="col-sm-6" >
+                            <img src="" alt="" class="dropzone"  id="imagePlaceholder" height="150px" width="150px" style="border-radius: 50%; margin-bottom:20px;">
+                        </div>
+                              
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 add_top_30">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="code_client">Code client</label>
+                            <input type="number" class="form-control" name="codeClient" id="code_client">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="lastName">Nom</label>
+                            <input type="text" class="form-control" placeholder="votre nom ..." name="lastName" id="lastName">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="firstName">Prénom</label>
+                            <input type="text" class="form-control" placeholder="votre prénom ..." name="firstName" id="firstName">
+                        </div>
+                    </div> 
+                </div>
+                
+            </div>
+     
+        </div>
+       <!-- /Row -->
+ 
+        <div class="form-group">
+            <button type="submit" class="btn btnEnregistrer btn-lg ">Valider</button>
+        </div>
+
+    </form>
+    <!-- /FORM -->
+
+
+</div>
+<!-- /BOX generale -->
+
+    
+
+
+
+
+
+<%- include('../partials/JsStyle2') -%>
+<%- include('../partials/footer') -%>

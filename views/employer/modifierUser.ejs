@@ -1,0 +1,372 @@
+<%- include('../partials/header1') -%>
+    <%- include('../partials/styleDashboard') -%>
+        <%- include('../partials/styleAddProduct') -%>
+            <%- include('../partials/style3') -%>
+                <%- include('../partials/header2') -%>
+
+
+                
+                <!-- Breadcrumb -->
+                <div class="breadcrumb flat">
+                    <a href="<%= '/users/modifier/'  + user.id %>">Admin</a>
+
+                    <% if (user.username==='admin') { %>
+                        <a href="/users/usersList" >Liste Employé(e)s</a>
+                        <a href="/users/addUser">Ajouter Employé(e)s</a> 
+                    <% }else{ %>
+                        <a href="#">Liste Employé(e)s</a>
+                        <a href="#">Ajouter Employé(e)s</a>
+                    <% } %>
+
+                    <a href="/users/modifier/<%= event.id %>" class="active">Modifier Employé(e)</a>
+                </div>
+                <!-- Fin Breadcrumb -->
+
+
+
+                    <!-- ROW général -->
+                    <div class="row">
+
+
+
+
+
+
+
+
+                        <!-- User Cart -->
+                        <div class="col-md-4">
+                            <div class="card card-user">
+
+                                <div class="image">
+                                    <img src="/img/bg5.jpg" alt="...">
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="author">
+
+                                        <a href="#">
+                        <img class="avatar border-gray" src="<%= '/images/' + event.avatar%>" alt="...">
+                        <div><span class="name"><%= event.lastName%>  <%= event.firstName%></span><span>    (<%= event.gender%>)</span></div> 
+                    </a>
+
+                                        <p class="Username">
+                                            <%= event.username%>
+                                        </p>
+
+
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-12 ">
+                                                <span style="font-weight: bolder; font-size: medium;">Email : </span><span class="adresse"> <%= event.email%> </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-12 ml-auto">
+                                                <span style="font-weight: bolder; font-size: medium;">Adresse : </span><span class="adresse"> <%= event.adress%> </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-top: 25px;">
+                                            <div class="col-lg-6 col-md-6 col-6 ml-auto">
+                                                <span style="font-weight: bolder; font-size: medium;">Tel : </span><span class="adresse"> <%= event.tel%> </span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-6 ml-auto">
+
+                                                <span style="font-weight: bolder; font-size: medium;">DN: </span><span class="adresse"> <%= eventDate%> </span>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <hr>
+                                    <div class="button-container">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-6 col-6 ml-auto ">
+                                                <a href="mailto:<%= event.email%>"><i class="fa fa-envelope" aria-hidden="true" ></i></a>
+
+
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+
+                                                <small style="font-weight: bolder;">Num caisse</small>
+                                                <br>
+                                                <span>N° **</span>
+                                                </h6>
+                                            </div>
+                                            <div class="col-lg-3 mr-auto">
+                                                <small style="font-weight: bolder;">Ventes</small>
+                                                <br>
+                                                <span>0 DA </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /User Cart -->
+
+
+
+
+
+                        <!-- User informations et Modifications -->
+                        <div class="col-md-8">
+
+                            <!-- UL-->
+                            <ul class="nav nav-tabs" id="navTabUser">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#home">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Modifier Profile</h5>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#menu1">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Modifier Password</h5>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#menu2">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Modifier Photo</h5>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /UL-->
+
+
+
+                            <!-- Tab-->
+                            <div class="tab-content">
+
+                                <!-- tab1 -->
+                                <div id="home" class="tab-pane in active">
+                                    <div class="card card-user">
+                                        <div class="card-body">
+
+                                            <%- include('../message/modifierUserMsg') -%>
+
+                                                <!-- FORM 1 (modier profil user) -->
+                                                <form action="/users/modifier" method="POST" class="modifierProfilUserForm">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-5">
+                                                            <label for="nom" style="font-size: 2rem;">Nom</label>
+                                                            <input type="text" class="form-control" name="lastName" id="nom" placeholder="nom" value="<%= event.lastName%>">
+                                                        </div>
+                                                        <input type="hidden" name="id" value="<%=event.id%>">
+                                                        <div class="form-group col-md-4">
+                                                            <label for="prenom" style="font-size: 2rem;">Prenom</label>
+                                                            <input type="text" class="form-control" name="firstName" id="prenom" placeholder="prenom" value="<%= event.firstName%>">
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label for="userN">Nom Utilisateur</label>
+                                                            <input type="text" class="form-control" name="usernameF" id="userN" value="<%= event.username%>">
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="email" style="font-size: 2rem;">Email</label>
+                                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<%= event.email%>">
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label for="numTel" style="font-size: 2rem;">Telephone</label>
+                                                            <input type="number" name="numTel" id="numTel" class="form-control" value="<%= event.tel%>">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="date" style="font-size: 2rem;">Date de Naissance</label>
+                                                            <input type="date" name="dateN" id="date" class="form-control " value="<%= eventDate%>">
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label for="genre" style="font-size: 2rem;">Genre</label>
+                                                            <select aria-controls="dataTable" class="form-control form-control-sm" name="gender" id="gender">
+                                        <% if (event.gender==='Homme'){ %>
+                                            <option value="Homme"><%= event.gender%></option>
+                                            <option value="Femme">Femme</option>
+                                        <%} else if (event.gender === 'Femme'){ %>  
+                                            <option value="Femme"><%= event.gender%></option>
+                                            <option value="Homme">Homme</option>  
+                                        <% }else{ %>
+                                            <option value="">Sexe</option>
+                                            <option value="Homme">Homme</option>  
+                                            <option value="Femme">Femme</option>
+                                        <% } %>
+                                    </select>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-5">
+                                                            <label for="adress" style="font-size: 2rem;">Address</label>
+                                                            <input type="text" class="form-control" name="adresse" id="adress" value="<%= event.adress%>">
+                                                        </div>
+
+                                                        <div class="form-group col-md-3">
+                                                            <label for="codePostale" style="font-size: 2rem;">Code Postale</label>
+                                                            <input type="number" class="form-control" name="codePostale" id="codePostale" value="<%= event.codePostale%>">
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-row" style="display: none;">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="mdp" style="font-size: 2rem;">Password</label>
+                                                            <input type="text" class="form-control" name="motDePasse" id="mdp" value="<%= event.mdp%>">
+                                                        </div>
+                                                    </div>
+
+                                                    <input type="text" value="<%=event.avatar%>" name="noTof" id="noTof" style="display: none;">
+
+                                                    <button type="submit" class="btn btnEnregistrer modifierProfilUserButton">modifier</button>
+                                                  
+
+                                                </form>
+                                                <!-- /FORM 1 (modier profil user) -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /tab1 -->
+
+                                <!-- tab2 -->
+                                <div id="menu1" class="tab-pane">
+                                    <div class="card card-user ">
+                                        <div class="card-body ">
+
+                                            <!-- /FORM 2 (modier mot de passe user) -->
+                                            <form action="/users/modifierMdp" method="POST" class="modifierMdpUserForm">
+
+                                                <label for="avatar" style="font-size: 2rem; margin-bottom: 25px;">Veuillez remplir tout les champs :</label>
+
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="newMdp" style="font-size: 2rem;">Nouveau mot de passe</label>
+                                                        <input type="password" class="form-control" name="newMdp" id="newMdp">
+                                                    </div>
+
+                                                    <div class="form-group col-md-6">
+                                                        <label for="ConfirmnewMdp" style="font-size: 2rem;">Confirmer mot de passe</label>
+                                                        <input type="password" class="form-control" name="ConfirmnewMdp" id="ConfirmnewMdp">
+                                                    </div>
+                                                </div>
+
+                                                <div style="display: none;">
+                                                    <input type="text" name="nomMdp" id="nomMdp" value="<%= event.lastName%>">
+                                                    <input type="text" name="prenomMdp" id="prenomMdp" value="<%= event.firstName%>">
+                                                    <input type="text" name="userNameMdp" id="userNameMdp" value="<%= event.username%>">
+                                                    <input type="email" name="emailMdp" id="emailMdp" value="<%= event.email%>">
+                                                    <input type="number" name="telMdp" id="telMdp" value="<%= event.tel%>">
+                                                    <input type="date" name="dateMdp" id="dateMdp" value="<%= eventDate%>">
+                                                    <input type="text" name="genreMdp" id="genreMdp" value="<%= event.gender%>">
+                                                    <input type="text" name="adresseMdp" id="adresseMdp" value="<%= event.adress%>">
+                                                    <input type="text" name="wilayaMdp" id="wilayaMdp" value="<%= event.wilaya%>">
+                                                    <input type="number" name="codePostalMdp" id="codePostalMdp" value="<%= event.codePostale%>">
+                                                    <input type="text" name="idMdp" id="idMdp" value="<%=event.id%>">
+                                                    <input type="text" value="<%=event.avatar%>" name="noTofMdp" id="noTofMdp" style="display: none;">
+                                                </div>
+
+                                                <button type="submit" class="btn btnEnregistrer modifierMdpUserButton">Sauvegarder</button>
+                                            </form>
+                                            <!-- /FORM 2 (modier profil user) -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- tab2 -->
+
+                                <!-- tab3 -->
+                                <div id="menu2" class="tab-pane">
+                                    <div class="card card-user">
+                                        <div class="card-body">
+
+                                            <!-- FORM 3 (modier photo user) -->
+                                            <form action="/users/modifierTof" method="POST" enctype="multipart/form-data" class="modifierTofUserForm">
+
+                                                <div>
+
+                                                    <label for="avatar" style="font-size: 2rem;">Cliquer sur l'icone pour charger votre photo</label>
+                                                    <div class="row align-items-end">
+
+                                                        <div class="col-sm-3"> </div>
+
+                                                        <div class="col-sm-3">
+
+                                                            <input type="file" name="avatar" id="avatar" class="inputfile inputfile-5" data-multiple-caption="{count} files selected" multiple onchange="readURL(this)" />
+
+                                                            <label for="avatar">
+                                            <figure>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg>
+                                            </figure> 
+                                            <span>Uploader ici !</span>
+                                        </label>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <img src="<%= '/images/' + event.avatar%>" alt="" class="dropzone" id="imagePlaceholder" height="200px" width="200px" style="border-radius: 50%">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div style="display: none;">
+                                                    <input type="text" name="nomTof" id="nomTof" value="<%= event.lastName%>">
+                                                    <input type="text" name="prenomTof" id="prenomTof" value="<%= event.firstName%>">
+                                                    <input type="text" name="userNameTof" id="userNameTof" value="<%= event.username%>">
+                                                    <input type="email" name="emailTof" id="emailTof" value="<%= event.email%>">
+                                                    <input type="number" name="telTof" id="telTof" value="<%= event.tel%>">
+                                                    <input type="date" name="dateTof" id="dateTof" value="<%= eventDate%>">
+                                                    <input type="text" name="genreTof" id="genreTof" value="<%= event.gender%>">
+                                                    <input type="text" name="adresseTof" id="adresseTof" value="<%= event.adress%>">
+                                                    <input type="text" name="wilayaTof" id="wilayaTof" value="<%= event.wilaya%>">
+                                                    <input type="number" name="codePostalTof" id="codePostalTof" value="<%= event.codePostale%>">
+                                                    <input type="password" name="MdpTof" id="MdpTof" value="<%=event.mdp%>">
+                                                    <input type="text" name="idTof" id="idTof" value="<%=event.id%>">
+                                                </div>
+
+                                                <button type="submit" class="btn btnEnregistrer modifierTofUserButton">modifier</button>
+
+                                            </form>
+                                            <!-- /FORM 3 (modier photo user) -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /Tab 3-->
+
+                            </div>
+                            <!-- /Tab-->
+                        </div>
+                        <!-- User informations et Modifications -->
+
+
+
+
+                    </div>
+           
+                   
+
+
+
+
+
+
+
+
+                    <%- include('../partials/JsStyle1') -%>
+                        <%- include('../partials/JsStyle2') -%>
+                            <%- include('../partials/footer') -%>

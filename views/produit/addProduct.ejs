@@ -1,0 +1,134 @@
+<%- include('../partials/header1') -%>
+<%- include('../partials/styleDashboard') -%>
+<%- include('../partials/styleAddProduct') -%>
+<%- include('../partials/style3') -%>
+<%- include('../partials/header2') -%>
+
+
+
+<!-- Breadcrumb -->
+<div class="breadcrumb flat">
+    <a href="<%= '/users/modifier/'  + user.id %>">Admin</a>
+    <a href="/product/ProductList">Liste Produits</a>
+    <a href="/product/addProduct" class="active">Ajouter produits</a>
+</div>
+<!-- Fin Breadcrumb -->
+                      
+                      
+                    
+<div class="box_general padding_bottom">
+    <div class="header_box version_2">
+    <h2><i class="fa fa-file"></i>Ajout </h2>
+    </div>
+
+
+<% if( errors ){ %>
+<% errors.forEach((err)=>{ %>
+    <div class="alert alert-danger">
+        <%= err.msg %>
+    </div>
+   
+<%});%>
+<%}%>
+
+ <form action="/product/addProduct" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-4">
+            <div style="margin-top: 11%;">
+                   
+                    <div class="row align-items-end">
+                       
+    
+                        <div class="col-sm-6" >
+                            <img src="" alt="" class="dropzone"  id="imagePlaceholder" height="150px" width="150px" style="border-radius: 50%; margin-bottom:20px;">
+                        </div>
+                        <div class="col-sm-6">
+                            
+                            <input type="file" name="avatar" id="avatar"  class="inputfile inputfile-5 " data-multiple-caption="{count} files selected" multiple onchange="readURL(this)"/>
+                            <label for="avatar" ><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span style="font-size: 13px">Uploader ici !</span></label>
+                        </div>
+                        
+                    </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 add_top_30">
+           <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="id-prod">Code produit</label>
+                        <input type="number" class="form-control" placeholder="Code ..." name="Code" id="id-prod">
+                    </div>
+                </div>
+        
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Qtt-prod">Quantité produit</label>
+                        <input type="number" class="form-control" placeholder="Quantité ..." name="Qtt" id="Qtt-prod">
+                    </div>
+                </div>
+           </div>
+
+           <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Nom-prod">Nom produit</label>
+                        <input type="text" class="form-control" placeholder="Nom ..." name="Name" id="Nom-prod">
+                    </div>
+                </div>
+        
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="prix-prod">Prix Unitaire</label>
+                        <input type="number" class="form-control" placeholder="Prix ..." name="Price" id="prix-prod">
+                    </div>
+                </div>
+           </div>
+
+           <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cat-prod">Categorie produit</label>
+                        
+                        <select aria-controls="dataTable" class="form-control form-control-sm" name="Categorie" id="cat-prod">
+                            <option value="#">Faites votre choix</option>        
+                            <% chunk.forEach((events)=>{ %>
+                                        <% events.forEach((event)=>{ %>
+                                        
+                                        <option value="<%= event.Name%>" ><%= event.Name%></option>
+                                        <%})%>
+                                        <%})%>
+                        </select>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                </div>
+           </div>
+
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-lg btnEnregistrer">Enregistrer</button>
+        </div>
+    </div>
+    <!-- /row-->
+   
+    </div>
+    <!-- /row-->
+   
+    
+</form>
+</div>
+<!-- /box_general-->
+
+<%- include('../partials/JsStyle2') -%> 
+<%- include('../partials/footer') -%>          
+                          
+                 
+                  
+                  
+                  
+                  
+                  

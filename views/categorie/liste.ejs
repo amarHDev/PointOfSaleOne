@@ -1,0 +1,108 @@
+<%- include('../partials/header1') -%>
+<%- include('../partials/styleDashboard') -%>
+<%- include('../partials/style3') -%>
+<%- include('../partials/header2') -%>
+
+
+
+
+
+
+<!-- Breadcrumb -->
+<div class="breadcrumb flat">
+    <a href="<%= '/users/modifier/'  + user.id %>">Admin</a>
+    <a href="/categorie" class="active">Liste Catégories</a>
+    <a href="/categorie/add">Ajouter Catégorie</a> 
+</div>
+<!-- Fin Breadcrumb -->
+
+
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+
+            <div class="card-header">   
+                <i class="fa fa-table" style="margin-right: 15px;"></i>
+                LISTE DES CLIENTS
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+
+                    <!-- Row HEADER -->
+                    <div class="row" style="margin-bottom: 25px;">
+                      
+                        <div class="col-sm-6 col-md-6 " ></div>
+                            
+                        <div class="col-sm-3 col-md-3 " > </div>
+                           
+                        <div class="col-sm-3 col-md-3 " >
+                            <form class="searchF" action="">
+                                <input type="text" class="form-control form-control-sm" placeholder="Rechercher ..." id="scannFilterClient">
+                            </form>
+                        </div>
+                        
+                    </div>
+                    <!-- /Row HEADER -->
+                    <% if( (message) && (message != "") ){ %>
+                        <div class="alert alert-success">
+                        <%= message %>
+                        </div>
+                    <%}%>
+                    <!-- Row Body -->
+                    <div class="contacts-area mg-b-15" style="margin-bottom: 25px;">
+                        <div class="container-fluid">
+                            <div class="row filter ">
+
+
+
+
+                                  
+
+                                    <div class="contacts-area mg-b-15">
+                                        <div class="container-fluid ">
+                                            <div class="row filter ">
+                                                <% chunk.forEach((events)=>{ %>
+                                                    <% events.forEach((event)=>{ %>
+
+                                                <div class="card " style="margin-left:20px;width: 13.5rem; margin-bottom: 10px; ">
+                                                    <img class="card-img-top " src="<%='/imgCat/' + event.avatar%>" style=" width:100%; height:50%;" alt="Card image cap">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title" style="height: 40px;">
+                                                            <%=event.Name%>
+                                                        </h5>
+                                                        <p class="card-text">
+                                                            <%=event.mesure%>.</p>
+                                                        <a href="<%= '/categorie/modifier/' + event.id%>" class="btn  btnVoir">Edit</a>
+                                                        <a href="<%= '/categorie/delete/' + event.id%>" class="btn btnVoir2">delete</a>
+                                                    </div>
+                                                </div>
+                                                    <%})%>
+                                                <%})%>
+                                            </div>
+                                         </div>
+                                    </div>
+
+
+
+    </div>
+
+</div>
+</div>
+<!-- Row Body -->   
+             
+            </div>
+      
+        </div>
+    </div>
+
+</div>
+<!-- /content-wrapper -->
+
+
+
+<%- include('../partials/JsStyle1') -%>
+<%- include('../partials/footer') -%>

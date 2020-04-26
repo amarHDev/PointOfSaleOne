@@ -1,0 +1,42 @@
+<%- include('../partials/header1') -%>
+    <%- include('../partials/styleDashboard') -%>
+        <%- include('../partials/styleAddProduct') -%>
+            <%- include('../partials/style3') -%>
+                <%- include('../partials/header2') -%>
+
+
+
+<!-- Breadcrumb -->
+<div class="breadcrumb flat">
+    
+    <a href="<%= '/users/modifier/'  + user.id %>">Admin</a>
+    <a href="/param" class="active">Paramètres</a> 
+   
+</div>
+<!-- Fin Breadcrumb -->
+
+
+
+<!-- BOX generale -->
+<div class="box_general padding_bottom">
+
+    <div class="header_box version_2">
+        <h2><i class="fa fa-paint-brush" aria-hidden="true"></i>Modifier Thème</h2>
+    </div>
+
+                <div class="container">
+                    <ul class="color-switcher">
+                        <li data-color="black"></li>
+                        <li data-color="green"></li>
+                        <li data-color="purple"></li>
+                        <li data-color="red"></li>
+
+                    </ul>
+                    <h3>Thème Actuelle</h3>
+                    <div style="width: 92%;"> En cours ...
+                    </div>
+                </div>
+
+</div>
+
+                <%- include('../partials/footer') -%>

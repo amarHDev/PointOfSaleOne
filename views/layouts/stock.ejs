@@ -1,0 +1,236 @@
+<%- include('../partials/header1') -%>
+<%- include('../partials/styleDashboard') -%>
+<%- include('../partials/styleAddProduct') -%>
+<%- include('../partials/header2') -%>
+
+
+
+
+
+
+<!-- Breadcrumb -->
+<div class="breadcrumb flat">
+    <a href="<%= '/users/modifier/'  + user.id %>">Admin</a>
+    <a href="/product/productList">Produits</a>
+    <a href="/stock" class="active">Stock et suivi</a> 
+</div>
+<!-- Fin Breadcrumb -->
+
+
+
+
+
+
+
+<!-- content-wrapper -->
+<div class="content-wrapper">
+    <div class="container-fluid">
+
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+
+            <div class="card-header">
+                <i class="fa fa-table" style="margin-right: 15px;"></i> Tout les produits
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+
+                    <!-- Row HEADER -->
+                    <div class="row">
+
+                        <div class="col-sm-6 col-md-6 "></div>
+
+                        <div class="col-sm-3 col-md-3 "> </div>
+
+                        <div class="col-sm-3 col-md-3 ">
+                            <form id="searchP" action="">
+                                <input type="text" class="form-control form-control-sm" placeholder="Rechercher ..." id="scannFilterProductStock">
+                                <!-- <button type="button" class="btn btn-primary" ><i class="fa fa-search" aria-hidden="true"></i></button> -->
+                            </form>
+                        </div>
+
+                    </div>
+                    <!-- /Row HEADER -->
+
+                    <!-- Row Body -->
+                    <div class="contacts-area mg-b-15" style="margin-bottom: 25px;">
+                        <div class="container-fluid">
+                            <div class="row filter ">
+
+                                <% chunk.forEach((events)=>{ %>
+                                    <% events.forEach((event)=>{ %>
+
+                                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="student-inner-std res-mg-b-30">
+
+                                                <div class="student-img">
+                                                    <img src="<%= '/imgProduct/' + event.avatar%>" alt="" />
+                                                </div>
+
+                                                <div class="student-dtl">
+                                                    <h2>
+                                                        <%= event.Name%>
+                                                            <%= event.Price%>
+
+                                                    </h2>
+                                                    <span>Code :</span>
+                                                    <p class="dp" style="
+                                                    margin-top:5px;">
+                                                        <span id="span2"><%= event.Code%></span>
+                                                    </p>
+                                                    <% if(event.Qtt<10){%>
+                                                        <div style="background-color: red;
+                                                            margin-top:5px; width: 41%;
+                                                            margin-left:30%;
+                                                            color:white;
+                                                            font-weight: bold;
+                                                            border-radius: 10px;">
+                                                            <%= event.Qtt%>
+                                                        </div>
+
+                                                        <%}else if(20>event.Qtt){%>
+                                                            <div style="background-color: orange;
+                                                            color:white;
+                                                            margin-top:5px; width: 41%;
+                                                            margin-left:30%;
+                                                            font-weight: bold;
+                                                            border-radius: 10px;">
+                                                                <%= event.Qtt%>
+                                                            </div>
+                                                            <%}else if(event.Qtt>=20){%>
+                                                                <div style="background-color: green;
+                                                                margin-top:5px; width: 41%;
+                                                                margin-left:30%;
+                                                                font-weight: bold;
+                                                                color:white;
+                                                                border-radius: 10px;">
+                                                                    <%= event.Qtt%>
+                                                                </div>
+                                                                <%}%>
+                                                </div>
+
+                                                <div class="student-voirPlus ">
+                                                    <a href="<%='/product/modifier/' + event.id %>" title="Voir Produit"><button type="button" class="btn btnEnregistrer" style=" border-radius: 7px;">Voir Plus</button></a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <%})%>
+                                            <%})%>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Row Body -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- /content-wrapper -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- pagination-->
+<div class="row">
+
+    <div class="col-sm-12 col-md-5">
+
+        <% if(pageNmbr == 1){  %>
+            <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Affichage de
+                <%= pageNmbr%> à
+                    <%= pageNmbr + 7 %> sur
+                        <%= total%> entrées</div>
+            <% }else if(pageNmbr == total){ %>
+                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Affichage de
+                    <%= pageNmbr + 7 %> à
+                        <%= total %> sur
+                            <%= total%> entriées</div>
+                <% }else{ %>
+                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Affichage de
+                        <%= pageNmbr + 7 %> à
+                            <%= total%> %> sur
+                                <%= total%> entriées</div>
+                    <% } %>
+
+    </div>
+
+    <div class="col-sm-12 col-md-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+            <ul class="pagination pagination-sm">
+
+                <% if( pageNmbr == 1 ){%>
+                    <li class="paginate_button page-item previous disabled" id="dataTable_previous">
+                        <a href="#" aria-controls="dataTable" class="page-link">Previous</a>
+                    </li>
+                    <%}else{%>
+                        <% k = pageNmbr-1 %>
+                            <li class="paginate_button page-item previous" id="dataTable_previous">
+                                <a href="<%= '/stock/' + k%>" aria-controls="dataTable" class="page-link">Previous</a>
+                            </li>
+                            <%}%>
+
+
+
+
+                                <% for (let i=1 ; i<= Math.ceil(total/8); i++ ){%>
+                                    <!-- math.ceil()  si total/5= 2.1 elle prend 3-->
+                                    <% if( pageNmbr == i){%>
+                                        <!-- Si la page  envoyer en paramètre est la page en cours en change -->
+                                        <li class="paginate_button page-item active">
+                                            <a href="<%= '/stock/' + i%>" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+                                                <%= i%>
+                                            </a>
+                                        </li>
+                                        <%}else{%>
+                                            <li class="paginate_button page-item ">
+                                                <a href="<%= '/stock/' + i%>" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+                                                    <%= i%>
+                                                </a>
+                                            </li>
+                                            <%}%>
+                                                <%} %>
+
+
+
+
+
+
+                                                    <% if( pageNmbr == Math.ceil(total/2) ){%>
+                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                                            <a href="" aria-controls="dataTable" class="page-link">Next</a>
+                                                        </li>
+                                                        <%}else{%>
+                                                            <% k = pageNmbr+1 %>
+                                                                <li class="paginate_button page-item next" id="dataTable_next">
+                                                                    <a href="<%= '/stock/' + k%>" aria-controls="dataTable" class="page-link">Next</a>
+                                                                </li>
+                                                                <%}%>
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /pagination-->
+
+
+
+
+<%- include('../partials/JsStyle1') -%>
+<%- include('../partials/footer') -%>

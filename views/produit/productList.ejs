@@ -1,0 +1,215 @@
+<%- include('../partials/header1') -%>
+    <%- include('../partials/styleDashboard') -%>
+        <%- include('../partials/style3') -%>
+            <%- include('../partials/header2') -%>
+
+
+
+
+
+                <!-- Breadcrumbs-->
+                <div class="breadcrumb flat">
+                    <a href="<%= '/users/modifier/'  + user.id %>">Admin</a>
+                    <a href="/product/productList" class="active">Liste Produits</a>
+                    <a href="/product/addProduct">Ajouter produits</a>
+                </div>
+
+
+
+
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+
+                        <!-- Example DataTables Card-->
+                        <div class="card mb-3">
+                            <div class="card-header">
+
+                                <% if( (message) && (message != "") ){ %>
+
+                                    <div class="alert alert-success">
+                                        <%= message %>
+                                    </div>
+
+                                    <%};%>
+
+                                        <i class="fa fa-table" style="margin-right: 15px;"></i>LISTE DES PRODUITS</div>
+                            <div class="card-body">
+
+                                <div class="row" id="headerL">
+
+                                    <div class="col-sm-6 col-md-6 ">
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 ">
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 ">
+
+                                        <form id="searchP" action="">
+                                            <input type="text" class="form-control form-control-sm" placeholder="Rechercher ..." id="scannFilterProduct">
+                                            <!-- <button type="button" class="btn btn-primary" ><i class="fa fa-search" aria-hidden="true"></i></button> -->
+                                        </form>
+
+
+                                    </div>
+
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: center; ">Image</th>
+                                                <th style="text-align: center; ">Code</th>
+                                                <th style="text-align: center; ">Nom</th>
+                                                <th style="text-align: center; ">Prix unitaire</th>
+                                                <th style="text-align: center; ">Quantité</th>
+                                                <th style="text-align: center;">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th style="text-align: center; ">Image</th>
+                                                <th style="text-align: center; ">Code</th>
+                                                <th style="text-align: center; ">Nom</th>
+                                                <th style="text-align: center; ">Prix unitaire</th>
+                                                <th style="text-align: center; ">Quantité</th>
+                                                <th style="text-align: center;">Actions</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody class="filter">
+
+                                            <% chunk.forEach((events)=>{ %>
+                                                <% events.forEach((event)=>{ %>
+                                                    <tr>
+
+                                                        <td style="text-align: center;"><img src="<%= '/imgProduct/' + event.avatar%>" alt="" height="50px" width="50px" style="border-radius: 3%;"></td>
+                                                        <td  style="text-align: center; padding-top: 2%;">
+                                                            <span id="span2"><%= event.Code%></span>
+                                                        </td>
+                                                        <td style="text-align: center; padding-top: 2%;">
+                                                            <%= event.Name%>
+                                                        </td>
+                                                        <td style="text-align: center; padding-top: 2%;">
+                                                            <%= event.Price%>
+                                                        </td>
+                                                        <td style="text-align: center; padding-top: 2%;">
+                                                            <%= event.Qtt%>
+                                                        </td>
+                                                        <td>
+                                                            <div class="text-center">
+                                                                <div class="btn-group">
+
+                                                                    <a class="tip btn btn-xs btnVoir5" href="<%=  '/product/modifier/'  + event.id %>" title="View product"><i class="fa fa-edit"></i></a>
+
+                                                                    <a href="<%= '/product/delete/' + event.id %>" onclick="return confirm('You are going to delete product, please click ok to delete.')" title="Delete Product" class="tip btn btnVoir7 btn-xs"><i class="fa fa-trash-o"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                    <%})%>
+                                                        <%})%>
+
+                                        </tbody>
+                                    </table>
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 6 of 57 entries</div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                <ul class="pagination pagination-sm">
+
+                                                    <% if( pageNmbr == 1 ){%>
+                                                        <li class="paginate_button page-item previous disabled" id="dataTable_previous">
+                                                            <a href="#" aria-controls="dataTable" class="page-link">Previous</a>
+                                                        </li>
+                                                        <%}else{%>
+                                                            <% k = pageNmbr-1 %>
+                                                                <li class="paginate_button page-item previous" id="dataTable_previous">
+                                                                    <a href="<%= '/product/productList/' + k%>" aria-controls="dataTable" class="page-link">Previous</a>
+                                                                </li>
+                                                                <%}%>
+
+                                                                    <% for (let i=1 ; i<= Math.ceil(total/6); i++ ){%>
+                                                                        <!-- math.ceil()  si total/5= 2.1 elle prend 3-->
+                                                                        <% if( pageNmbr == i){%>
+                                                                            <!-- Si la page  envoyer en paramètre est la page en cours en change -->
+                                                                            <li class="paginate_button page-item active">
+                                                                                <a href="<%= '/product/productList/' + i%>" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+                                                                                    <%= i%>
+                                                                                </a>
+                                                                            </li>
+                                                                            <%}else{%>
+                                                                                <li class="paginate_button page-item ">
+                                                                                    <a href="<%= '/product/productList/' + i%>" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+                                                                                        <%= i%>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <%}%>
+                                                                                    <%} %>
+
+                                                                                        <% if( pageNmbr == Math.ceil(total/6) ){%>
+                                                                                            <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                                                                                <a href="" aria-controls="dataTable" class="page-link">Next</a>
+                                                                                            </li>
+                                                                                            <%}else{%>
+                                                                                                <% k = pageNmbr+1 %>
+                                                                                                    <li class="paginate_button page-item next" id="dataTable_next">
+                                                                                                        <a href="<%= '/product/productList/' + k%>" aria-controls="dataTable" class="page-link">Next</a>
+                                                                                                    </li>
+                                                                                                    <%}%>
+
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+                                </div>
+                            </div>
+                            <div class="card-footer small text-muted">Mise à jour hier à 11:59 PM</div>
+                        </div>
+                        <!-- /tables-->
+                    </div>
+                    <!-- /container-fluid-->
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <%- include('../partials/JsStyle1') -%>
+                    <%- include('../partials/footer') -%>

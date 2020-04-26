@@ -1,0 +1,64 @@
+.student-dtl h2{
+    font-weight: bolder;
+	font-size:12px;
+	color:#303030;
+}
+.student-dtl p.dp, .student-dtl p.dp-ag{
+    font-size:12px;
+    display: inline-block;
+	color:#303030;
+	margin: 2px 0 0 0;
+}
+.student-dtl span{
+    font-weight: bold;
+}
+.student-inner-std{
+    width: 80%;
+    height: 350px;
+	text-align:center;
+    background:rgb(255, 255, 255);
+    border: 1px solid rgba(0, 0, 0, .1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    margin: 5px 5px 20px 5px;
+}
+.student-dtl{
+    height: 30%;
+	padding:20px 0 0 0;
+}
+.student-img {
+    width:100%;
+    height:50%;
+}
+.student-img img{
+    width:100%;
+    height:100%;
+}
+.contacts-area{
+    margin-top: 30px;
+}
+.student-voirPlus{
+    height: 20%;
+}
+
+.searchF input[type=text] {
+    padding: 13px;
+    font-size: 17px;
+    float: left;
+    width: 80%;
+}
+.searchF button {
+    float: left;
+    width: 15%;
+    height: 100%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 9px;
+    border-left: none;
+    cursor: pointer;
+}
+
+
+
+
+

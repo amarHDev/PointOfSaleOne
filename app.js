@@ -7,10 +7,8 @@ const passport = require('passport');
 const passportSetup = require('./config/passport');
 var CookieSession = require('cookie-session'); // Charge le middleware de sessions
 
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 8000;
-}
+let PORT = process.env.PORT || 8080;
+
 
 
 const app = express();
@@ -78,6 +76,8 @@ app.use('/', events);
 //connection to bdd 
 const db = require('./config/database');
 
-app.listen(port, function() {
-    console.log('Example app listening on port 3001!')
+
+
+app.listen(PORT, function() {
+    console.log(`Example app listening on port ${PORT}`)
 });

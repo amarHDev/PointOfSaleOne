@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require('express');
 const exphbs = require("express-handlebars");
 const bodyParser = require('body-parser'); //pour extraire les données taper dans les formulaires
@@ -80,4 +79,4 @@ const db = require('./config/database');
 
 
 
-app.listen(PORT);
+app.listen(PORT , console.log('port 8080'));

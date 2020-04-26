@@ -1,7 +1,7 @@
 require('dotenv').config()
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || '', { useUnifiedTopology: true, useNewUrlParser: true } , (err) => {
+mongoose.connect('mongodb+srv://admin:<admin1234>@cluster0-i3eps.mongodb.net/test?retryWrites=true&w=majority', { useUnifiedTopology: true, useNewUrlParser: true } , (err) => {
    if (err){
        console.log(err);
    }else{

@@ -1,12 +1,19 @@
 require('dotenv').config()
 const mongoose = require('mongoose');
 
-mongoose.connect( `mongodb+srv://admin:adminadmin@cluster0-i3eps.mongodb.net/test?retryWrites=true&w=majority` , { useUnifiedTopology: true} , (err) => {
-   if (err){
-       console.log(err);
-       console.log('connected eroorrrr !!! ...');
-   }else{
-       console.log('connected to db successfuly ...');
-   }
-});
+
+const db = process.env.MONGODB_URL;
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(db, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true
+    });
+    console.log("MongoDB is Connected...");
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
 

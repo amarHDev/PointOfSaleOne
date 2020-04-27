@@ -1,19 +1,13 @@
 require('dotenv').config()
-const db = require('mongoose');
+const mongoose = require('mongoose');
 
+mongoose.connect( process.env.MONGODB_URL|| 'mongodb://localhost:27017/posdb' , { useUnifiedTopology: true} , (err) => {
+   if (err){
+       console.log(err);
+       console.log('connected eroorrrr !!! ...');
+   }else{
+       console.log('connected to db successfuly ...');
+   }
+});
 
-const db = process.env.MONGODB_URL;
-
-const connectDB = async () => {
-  try {
-    await mongoose.connect(db, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true
-    });
-    console.log("MongoDB is Connected...");
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
-};
 

@@ -1027,9 +1027,7 @@ hr {
 .red .flat a.active:before{
     color: #000;
 }
-.red .flat a.active:hover:before{
-    color: #000;
-}
+  
 
 .red .flat a.active:hover, .flat a.active:hover:after{
     background-color: #09b83e;
@@ -1038,7 +1036,7 @@ hr {
 }
 .red .flat a:not(.active):hover, .flat a:not(.active):hover:after{
     background: #09b83e;
-    color:#fff;
+    color:#000;
 }
 
   

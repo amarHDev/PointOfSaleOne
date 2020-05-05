@@ -1020,7 +1020,7 @@ hr {
 
  /*Fin BreadCrumb*/
 
-.red .flat a.active, .flat a.active:after{
+.red .flat a.active, .red .flat a.active:after{
     background:  #3a6b35 ;  
     color: #fff;
 }
@@ -1029,12 +1029,12 @@ hr {
 }
   
 
-.red .flat a.active:hover, .flat a.active:hover:after{
+.red .flat a.active:hover, .red .flat a.active:hover:after{
     background-color: #09b83e;
     color:#fff;
    
 }
-.red .flat a:not(.active):hover, .flat a:not(.active):hover:after{
+.red .flat a:not(.active):hover, .red .flat a:not(.active):hover:after{
     background: #09b83e;
     color:#000;
 }

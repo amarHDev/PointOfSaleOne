@@ -681,13 +681,109 @@ hr {
 
 
 
+#btnU {
+    background-color: #45aaf2;
+    border: none;
+    color:#fff ;
+    display: inline-block;
+}
+
+#btnC {
+    background-color: #24d1d1;
+    color:#fff;
+}
+
+#btnU:hover {
+    background-color: #24d1d1;
+    color: #fff;
+}
+
+#btnC:hover {
+    background-color: #45aaf2;
+    color: #fff;
+}
+
+#inputformbTN:hover{
+    background-color: rgb(30, 255, 0);
+    border-color: rgb(30, 255, 0);
+}
+#PosBtnExit:hover{
+    background-color: rgb(255, 0, 0);
+    border-color:rgb(255, 0, 0) ;
+}
+#inputformbTN{
+    background-color: rgb(52, 167, 37);
+    border-color:rgb(52, 167, 37) ;
+}
+#PosBtnExit{
+    background-color: rgb(185, 38, 38);
+    border-color:rgb(185, 38, 38) ;
+}
+           
+
+.btnVoir{
+    background-color: rgb(52, 167, 37);
+    border-color: rgb(52, 167, 37);
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+.btnVoir:hover{
+    background-color: rgb(30, 255, 0);
+    border-color:rgb(30, 255, 0) ;
+    color: #fff;
+}
+.btnVoir2{
+    background-color: rgb(185, 38, 38);
+    border-color: rgb(185, 38, 38);
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.btnVoir2:hover{
+    background-color: rgb(255, 0, 0);
+    border-color:rgb(255, 0, 0) ;
+    color: #fff;
+}
+
+.btnVoir4{
+    background-color: #174b75;
+    border-color: #174b75;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+.btnVoir5{
+    background-color: #16a085;
+    border-color: #16a085;
+}
+.btnVoir6{
+    background-color: rgb(52, 167, 37);
+    border-color: rgb(52, 167, 37);
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+.btnVoir7{
+    background-color: #3a6b35 ;
+    border-color:#3a6b35 ;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.HoverEff4:hover, .HoverEff5:hover, .HoverEff6:hover, .HoverEff7:hover{
+    background: rgba(0, 0, 0, 0.2);
+}
 
 
-
-
-
-
-
+.btnEnregistrer{
+    background-color: #45aaf2;
+    border-color: #45aaf2;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+.btnEnregistrer:hover{
+    background-color: #16a085;
+    border-color: #16a085;
+    color: #fff;
+}
 
 
 

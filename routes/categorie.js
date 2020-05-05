@@ -88,6 +88,14 @@ router.get('/modifier/:id', isAuthenticated, (req, res) => {
 
 
         if (!err) {
+            EventCat.find({}, {}, (err, events) => { //ici
+                let chunk = [];
+                let chunkSize = 4;
+                for (let i = 0; i < events.length; i += chunkSize) {
+                    chunk.push(events.slice(i, chunkSize + i));
+                };
+
+
 
 
             res.render('categorie/modifier', {
@@ -99,12 +107,12 @@ router.get('/modifier/:id', isAuthenticated, (req, res) => {
                 style4: 'form.css',
                 JS2: 'Dropzon.js',
                 event: event,
-
+                chunk:chunk,
                 errors: req.flash('errors'),
                 message: req.flash('info'),
 
             });
-
+        });
         } else {
             console.log(err)
         }

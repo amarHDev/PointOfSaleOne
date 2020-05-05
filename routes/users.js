@@ -154,6 +154,12 @@ router.post('/users/addUser', upload.single('avatar'), passport.authenticate('lo
 
 // logout user  (Déconnexion)
 router.get('/logout', function(req, res) {
+    req.session.ticketList = [];
+    req.session.ticketSubTotal = 0;
+    req.session.ticketItem = 0;
+    req.session.ticketTotal = 0;
+    req.session.remisePrcentage = 0;
+    req.session.remisePoint = 0;
     req.logout();
     res.redirect('/');
 });

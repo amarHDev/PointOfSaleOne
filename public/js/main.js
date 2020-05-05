@@ -32,5 +32,5 @@ for (var i = 0; i < el.length; i++) {
 
 }
 /* si tu veux enlever le theme de couleur et revenir a l'original enleve le dernier commentaire Linge 35*/
-// localStorage.removeItem("pageColor");
+ //localStorage.removeItem("pageColor");
 

@@ -785,7 +785,23 @@ hr {
     color: #fff;
 }
 
+.flat a.active, .flat a.active:after{
+    background: #45aaf2 ;  
+    color: #fff;
+}
+.flat a.active:before{
+    color: #000;
+}
 
+.flat a.active:hover, .flat a.active:hover:after{
+    background-color: #16a085;
+    color:#fff;
+   
+}
+.flat a:not(.active):hover, .flat a:not(.active):hover:after{
+    background: #16a085;
+    color:#fff;
+}
 
 
 
